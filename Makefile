@@ -24,7 +24,7 @@ PKG_CONFIG = pkg-config
 BUILD = RELEASE
 DEBUG_OPTFLAGS = -g3
 RELEASE_OPTFLAGS = -O3 -DNDEBUG
-CFLAGS = -Wall -Wextra -pedantic `$(PKG_CONFIG) --cflags freetype2` $($(BUILD)_OPTFLAGS)
+CFLAGS = -Wall -Wextra -std=c89 -pedantic `$(PKG_CONFIG) --cflags freetype2` $($(BUILD)_OPTFLAGS)
 LDFLAGS = `$(PKG_CONFIG) --libs freetype2`
 
 OBJ = main.o
