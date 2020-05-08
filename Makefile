@@ -21,7 +21,7 @@
 CC = gcc
 PKG_CONFIG = pkg-config
 
-BUILD = DEBUG
+BUILD = RELEASE
 DEBUG_OPTFLAGS = -g3
 RELEASE_OPTFLAGS = -O3 -DNDEBUG
 CFLAGS = -Wall -Wextra -pedantic `$(PKG_CONFIG) --cflags freetype2` $($(BUILD)_OPTFLAGS)
