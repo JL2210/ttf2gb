@@ -82,7 +82,7 @@ void draw_tile(FT_Face face)
 		for (j = box.xMin; j < glyph->bitmap_left; j++)
 			putchar('0');
 		for (j = 0; j < (FT_Int)bitmap->width; j++)
-			putchar(bitmap->buffer[i * bitmap->width + j] ? '1' : '0');
+			putchar(bitmap->buffer[i * bitmap->width + j] ? '3' : '0');
                 for (j = box.xMin + glyph->bitmap_left + bitmap->width; j < box.xMax; j++)
 			putchar('0');
 		putchar('\n');
