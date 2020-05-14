@@ -18,19 +18,29 @@
 #########################################################################
 .POSIX:
 
+# variables to be set by the user
 CC = gcc
+CFLAGS =
+LDFLAGS =
 PKG_CONFIG = pkg-config
 
+# variables to be set by the maintainer
 BUILD = RELEASE
 DEBUG_OPTFLAGS = -g3
 RELEASE_OPTFLAGS = -O3 -DNDEBUG
-CFLAGS = -Wall -Wextra -std=c89 -pedantic `$(PKG_CONFIG) --cflags freetype2` $($(BUILD)_OPTFLAGS)
-LDFLAGS = `$(PKG_CONFIG) --libs freetype2`
+WARNFLAGS = -Wall -Wextra -std=c89 -pedantic
+FT_CFLAGS = `$(PKG_CONFIG) --cflags freetype2`
+FT_LDFLAGS = `$(PKG_CONFIG) --libs freetype2`
+REAL_CFLAGS = $($(BUILD)_OPTFLAGS) $(WARNFLAGS) $(FT_CFLAGS) $(CFLAGS)
+REAL_LDFLAGS = $(REAL_CFLAGS) $(FT_LDFLAGS) $(LDFLAGS)
 
-OBJ = main.o
+OBJ = main.o utils.o drawtile.o
 
 ttf2gb: $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -o $@
+	$(CC) $(REAL_LDFLAGS) -o $@ $(OBJ)
+
+.c.o:
+	$(CC) $(REAL_CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f ttf2gb main.o
+	rm -f ttf2gb $(OBJ)
